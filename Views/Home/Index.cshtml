@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>内容</th>
+                        <th>完了</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (TaskModel task in ((TaskListModel?)ViewData["tasks"])?.TaskList ?? new List<TaskModel>())
+                {
+                    <tr>
+                        <td>@task.Id</td>
+                        <td>@task.Name</td>
+                        <td>
+                            <form action="/Home/Done" method="post">
+                                <input type="submit" name="done" value="完了"></input>
+                                <input type="hidden" name="Id" value="@task.Id" />
+                            </form>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+    </div>
+</div>
